@@ -1,6 +1,6 @@
 import {Request, Response } from "express"
 import axios from "axios"
-import {prisma} from "@repo/db"
+import prisma from "@repo/db"
 import jwt from "jsonwebtoken"
 import { ApiError } from "../utils/ApiError"
 import { ApiResponse } from "../utils/ApiResponse"

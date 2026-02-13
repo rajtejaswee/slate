@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import {SignupSchema, SigninSchema} from "@repo/common";
-import {prisma} from "@repo/db";
+import prisma from "@repo/db"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 import { AsyncHandler } from "../utils/AsyncHandler";
