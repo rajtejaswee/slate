@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -b",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:@prisma/client",
     "start": "node dist/src/index.js",
     "dev": "npm run build && node dist/src/index.js"
   },
