@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState, Suspense } from "react"; // Added Suspense
+import { useEffect, useState, Suspense } from "react"; 
 import { useRouter, useSearchParams } from "next/navigation";
 
-// 1. Move your logic into this inner component
+// 1. We create a sub-component for the logic
 function AuthSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -13,10 +13,7 @@ function AuthSuccessContent() {
     const token = searchParams.get("token");
 
     if (token) {
-      // 1. Store the token
       localStorage.setItem("token", token);
-      
-      // 2. Redirect to Canvas
       router.push("/canvas");
     } else {
       setError(true);
@@ -38,7 +35,6 @@ function AuthSuccessContent() {
   return (
     <div className="flex h-screen w-full items-center justify-center bg-white">
       <div className="flex flex-col items-center gap-4">
-        {/* Simple Loading Spinner */}
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-zinc-200 border-t-zinc-900"></div>
         <p className="text-sm font-medium text-zinc-500">Securing your session...</p>
       </div>
@@ -46,7 +42,8 @@ function AuthSuccessContent() {
   );
 }
 
-// 2. Export the main page which wraps the content in Suspense
+// 2. We export the Main Page that wraps the content in Suspense
+// This fixes the build error!
 export default function AuthSuccess() {
   return (
     <Suspense fallback={
