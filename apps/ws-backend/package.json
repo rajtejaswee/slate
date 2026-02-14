@@ -2,9 +2,9 @@
   "name": "ws-backend",
   "version": "1.0.0",
   "main": "src/index.ts",
-  "scripts": {
+ "scripts": {
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:@prisma/client",
-    "start": "node dist/index.js",
+    "start": "NODE_PATH=../../node_modules node dist/index.js",
     "dev": "npm run build && npm run start"
   },
   "dependencies": {
