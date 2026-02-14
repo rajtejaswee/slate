@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react"; // Added Suspense
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function AuthSuccess() {
+// 1. Move your logic into this inner component
+function AuthSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState(false);
@@ -42,5 +43,18 @@ export default function AuthSuccess() {
         <p className="text-sm font-medium text-zinc-500">Securing your session...</p>
       </div>
     </div>
+  );
+}
+
+// 2. Export the main page which wraps the content in Suspense
+export default function AuthSuccess() {
+  return (
+    <Suspense fallback={
+      <div className="flex h-screen w-full items-center justify-center bg-white">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-zinc-200 border-t-zinc-900"></div>
+      </div>
+    }>
+      <AuthSuccessContent />
+    </Suspense>
   );
 }
