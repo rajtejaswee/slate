@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, LogOut, Plus, Search, Loader2 } from "lucide-react";
-import BackgroundPaths from "@/app/components/BackgroundPaths"; // Ensure path is correct
+import BackgroundPaths from "@/app/components/BackgroundPaths"; 
 import axios from "axios";
 import { HTTP_BACKEND } from "@/config";
 
