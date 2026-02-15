@@ -1,6 +1,6 @@
 import {Request, Response } from "express"
 import axios from "axios"
-import prisma from "@repo/db"
+import { prismaClient } from "@repo/db";
 import jwt from "jsonwebtoken"
 import { ApiError } from "../utils/ApiError"
 import { ApiResponse } from "../utils/ApiResponse"
@@ -37,10 +37,10 @@ export const googleCallback = AsyncHandler(async (req:Request, res:Response) => 
 
         const { email, name, picture } = userData;
 
-        let user = await prisma.user.findUnique({ where: { email } });
+        let user = await prismaClient.user.findUnique({ where: { email } });
 
         if (!user) {
-            user = await prisma.user.create({
+            user = await prismaClient.user.create({
                 data: {
                     email,
                     name,

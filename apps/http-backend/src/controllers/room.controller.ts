@@ -25,8 +25,6 @@ export const createRoom = AsyncHandler(async (req: AuthRequest, res: Response) =
         });
         res.json({ roomId: room.id, message: "Room created" });
     } catch(e) {
-        // We keep this try-catch specific because we want to return a 409 
-        // instead of a generic 500 if the room exists.
         res.status(409).json({ message: "Room already exists" });
     }
 });

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import  prisma  from "@repo/db";
+import { prismaClient } from "@repo/db";
 import jwt from "jsonwebtoken";
 import { AsyncHandler } from "../utils/AsyncHandler";
 import { ApiError } from "../utils/ApiError";
@@ -47,10 +47,10 @@ export const githubCallback = AsyncHandler(async (req: Request, res: Response) =
         if (!email) throw new ApiError(400, "GitHub email not accessible");
 
         // D. Database Sync
-        let user = await prisma.user.findUnique({ where: { email } });
+        let user = await prismaClient.user.findUnique({ where: { email } });
 
         if (!user) {
-            user = await prisma.user.create({
+            user = await prismaClient.user.create({
                 data: {
                     email,
                     name: userProfile.name || userProfile.login,
