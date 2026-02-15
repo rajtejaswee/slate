@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import {SignupSchema, SigninSchema} from "@repo/common";
-import prisma from "@repo/db"
+import { prismaClient } from "@repo/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 import { AsyncHandler } from "../utils/AsyncHandler";
@@ -17,7 +17,7 @@ export const signup = AsyncHandler(async(req: Request, res: Response) => {
 
         const {name, email, password} = parseData.data;
 
-        const existingUser = await prisma.user.findFirst({
+        const existingUser = await prismaClient.user.findFirst({
             where: {email}
         })
 
@@ -27,7 +27,7 @@ export const signup = AsyncHandler(async(req: Request, res: Response) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await prisma.user.create({
+        const user = await prismaClient.user.create({
             data: {
                 name,
                 email,
@@ -55,7 +55,7 @@ export const signin = AsyncHandler(async(req: Request, res:Response) => {
 
     const {email, password} = parseData.data;
 
-    const user = await prisma.user.findFirst({
+    const user = await prismaClient.user.findFirst({
             where: {email}
     })
 
