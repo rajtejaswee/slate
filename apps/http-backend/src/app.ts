@@ -1,9 +1,9 @@
 import "dotenv/config";
-import express from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import { prismaClient } from "@repo/db";
 
-const app = express();
+const app: Application = express();
 
 
 const allowedOrigins = [

@@ -1,20 +1,17 @@
 {
   "name": "http-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "type": "module",
+  "main": "./dist/index.js",
   "scripts": {
-    "build": "node build.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup src/index.ts --format esm --clean",
     "start": "node dist/index.js",
-    "dev": "npm run build && node dist/src/index.js"
+    "lint": "tsc --noEmit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@repo/common": "workspace:^",
-    "@repo/db": "workspace:^",
+    "@repo/common": "workspace:*",
+    "@repo/db": "workspace:*",
     "axios": "^1.13.4",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
@@ -27,10 +24,9 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.2.0",
-    "esbuild": "^0.27.3",
-    "esbuild-register": "^3.6.0",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "@types/node": "^20.1.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
   }
 }
