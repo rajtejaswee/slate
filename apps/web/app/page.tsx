@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react";
+import { ArrowRight, Github, Linkedin} from "lucide-react";
 import BackgroundPaths from "@/app/components/BackgroundPaths" 
 
 const GITHUB_URL = "https://github.com/rajtejaswee/slate";
@@ -44,7 +44,7 @@ export default function Home() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
                 </span>
-                Now Public Beta
+                Public Beta
              </span>
         </div>
 
@@ -59,7 +59,7 @@ export default function Home() {
         {/* Subtitle */}
         <p className="text-lg sm:text-xl text-zinc-500 font-medium leading-relaxed max-w-2xl mb-12 animate-fade-in opacity-0" style={{ animationDelay: "0.3s" }}>
           The infinite canvas for teams who move fast.  <br className="hidden sm:block"/> 
-          Sketch, collaborate, and build alongside AI.
+          Sketch, collaborate, and build alongside with everyone.
         </p>
 
         {/* Action Buttons */}
@@ -82,14 +82,14 @@ export default function Home() {
           <span>Built by <span className="text-zinc-900">Raj Tejaswee</span></span>
           <div className="h-3 w-[1px] bg-zinc-300 mx-1"></div>
           <div className="flex gap-2">
-            <Link href="https://linkedin.com" target="_blank" className="hover:text-blue-600 transition-colors"><Linkedin className="h-3.5 w-3.5" /></Link>
-            <Link href="https://twitter.com" target="_blank" className="hover:text-black transition-colors"><Twitter className="h-3.5 w-3.5" /></Link>
+            <Link href="https://www.linkedin.com/in/raj-tejaswee-147603247/" target="_blank" className="hover:text-blue-600 transition-colors"><Linkedin className="h-3.5 w-3.5" /></Link>
+            <Link href="https://github.com/rajtejaswee" target="_blank" className="hover:text-black transition-colors"><Github className="h-3.5 w-3.5" /></Link>
           </div>
         </div>
 
         <div className="pointer-events-auto flex gap-6 text-xs font-medium text-zinc-500 bg-white/50 backdrop-blur-md px-4 py-2 rounded-full border border-zinc-100 shadow-sm">
             <Link href="/privacy" className="hover:text-zinc-900 transition-colors">Privacy</Link>
-            <Link href={GITHUB_URL} target="_blank" className="hover:text-zinc-900 transition-colors">Open Source</Link>
+            <Link href={GITHUB_URL} target="_blank" className="hover:text-zinc-900 transition-colors">Source Code</Link>
         </div>
 
       </footer>

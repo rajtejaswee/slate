@@ -35,7 +35,6 @@ function AuthSuccessContent() {
   return (
     <div className="flex h-screen w-full items-center justify-center bg-white">
       <div className="flex flex-col items-center gap-4">
-        {/* FIXED VERSION SPINNER */}
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-zinc-200 border-t-zinc-900"></div>
         <p className="text-sm font-medium text-zinc-500">Securing your session...</p>
       </div>

@@ -33,13 +33,6 @@ export default function CanvasDashboard() {
 
     try {
         const token = localStorage.getItem("token");
-        
-        // 1. Try to fetch the room ID if user typed a slug (e.g., "my-room")
-        // If the user typed a number, we can skip this, but safer to always check.
-        // Or simpler: Just push to the URL. The Canvas page handles fetching shapes.
-        // However, since your backend expects Int IDs for shapes, let's try to resolve it.
-        
-        // Attempt to find room by Slug first
         try {
              const res = await axios.get(`${HTTP_BACKEND}/api/v1/room/slug/${roomId}`, {
                  headers: { Authorization: token }
@@ -49,14 +42,11 @@ export default function CanvasDashboard() {
                  return;
              }
         } catch(e) {
-            // If slug lookup failed, maybe it IS an ID?
             if (!isNaN(Number(roomId))) {
                  router.push(`/canvas/${roomId}`);
                  return;
             }
         }
-        
-        // If we fall through, just try pushing what they typed (fallback)
         router.push(`/canvas/${roomId}`);
         
     } catch (e) {
@@ -82,8 +72,6 @@ export default function CanvasDashboard() {
                 Authorization: token
             }
         });
-
-        // 2. Redirect to the Real Room ID returned by DB
         if (response.data.roomId) {
             router.push(`/canvas/${response.data.roomId}`);
         }

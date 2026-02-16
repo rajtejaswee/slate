@@ -85,9 +85,8 @@ export default function Canvas({ roomId, socket }: { roomId: string; socket: Web
   }, [roomId, socket]);
 
 
-  // ----------------------------------------------------------------------
+  
   // CURSOR MANAGEMENT
-  // ----------------------------------------------------------------------
   const getCursor = () => {
     if (tool === "hand") return isPanning ? "grabbing" : "grab";
     if (tool === "selection") return "default";
@@ -95,9 +94,8 @@ export default function Canvas({ roomId, socket }: { roomId: string; socket: Web
     return "crosshair";
   };
 
-  // ----------------------------------------------------------------------
+  
   // RENDER LOOP
-  // ----------------------------------------------------------------------
   useLayoutEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -139,9 +137,7 @@ export default function Canvas({ roomId, socket }: { roomId: string; socket: Web
     ctx.restore();
   }, [elements, activeElement, selectedElement, panOffset, zoom]);
 
-  // ----------------------------------------------------------------------
   // DRAW HELPER
-  // ----------------------------------------------------------------------
   const drawElement = (ctx: CanvasRenderingContext2D, element: Element) => {
     const { type, x, y, width, height, strokeColor, strokeWidth, opacity, points } = element;
     
@@ -198,9 +194,7 @@ export default function Canvas({ roomId, socket }: { roomId: string; socket: Web
     y: (e.clientY - panOffset.y) * (100 / zoom)
   });
 
-  // ----------------------------------------------------------------------
   // EVENT HANDLERS
-  // ----------------------------------------------------------------------
   const handleMouseDown = (e: React.MouseEvent) => {
     const { x, y } = getMouseCoords(e);
 

@@ -58,12 +58,10 @@ export default function BackgroundPaths() {
         
         {/* --- 1. THE GRID LAYER (Moved inside here) --- */}
         <div 
-            className="absolute inset-0 opacity-60" // INCREASED OPACITY (was 40)
+            className="absolute inset-0 opacity-60" 
             style={{
-                // Changed color to #cbd5e1 (Slate 300) - Much darker than before
                 backgroundImage: 'linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)',
                 backgroundSize: '32px 32px',
-                // Optional: Mask the edges so it fades out at the very far corners
                 maskImage: 'radial-gradient(circle at center, black 60%, transparent 100%)', 
             }}
         />

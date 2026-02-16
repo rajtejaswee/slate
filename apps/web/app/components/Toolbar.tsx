@@ -98,7 +98,6 @@ export default function Toolbar({
         <div className="w-px h-8 bg-zinc-200" />
 
         {/* --- GROUP 2: STYLES (Colors & Size) --- */}
-        {/* Only show styles if we aren't panning or erasing */}
         {!isLocked && selectedTool !== "hand" && selectedTool !== "eraser" && (
             <div className="flex items-center gap-4 px-2">
                 
@@ -173,7 +172,7 @@ export default function Toolbar({
   );
 }
 
-// Minimal Helper Button Components
+// Helper Button Components
 function ToolButton({ active, onClick, icon }: { active: boolean, onClick: () => void, icon: React.ReactNode }) {
     return (
         <button
