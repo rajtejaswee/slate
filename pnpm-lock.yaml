@@ -187,11 +187,8 @@ importers:
         specifier: ^5.10.2
         version: 5.22.0(prisma@5.22.0)
     devDependencies:
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
       '@types/node':
-        specifier: ^20.19.30
+        specifier: ^20.1.0
         version: 20.19.33
       prisma:
         specifier: ^5.10.2
