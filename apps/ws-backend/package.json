@@ -1,6 +1,7 @@
 {
   "name": "ws-backend",
   "version": "1.0.0",
+  "type": "module",
   "main": "src/index.ts",
  "scripts": {
   "build": "prisma generate && tsup src/index.ts --format esm --clean --no-external --external @prisma/client",
