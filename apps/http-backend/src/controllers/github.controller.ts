@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import { prismaClient } from "@repo/db";
+import { prismaClient } from "../db";
 import jwt from "jsonwebtoken";
 import { AsyncHandler } from "../utils/AsyncHandler";
 import { ApiError } from "../utils/ApiError";

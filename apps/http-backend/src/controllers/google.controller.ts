@@ -1,9 +1,8 @@
 import {Request, Response } from "express"
 import axios from "axios"
-import { prismaClient } from "@repo/db";
+import { prismaClient } from "../db";
 import jwt from "jsonwebtoken"
 import { ApiError } from "../utils/ApiError"
-import { ApiResponse } from "../utils/ApiResponse"
 import { AsyncHandler } from "../utils/AsyncHandler"
 
 export const googleAuth = (req:Request, res:Response) => {

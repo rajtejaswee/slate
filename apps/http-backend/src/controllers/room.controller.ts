@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { prismaClient } from "@repo/db";
+import { prismaClient } from "../db";
 import { AsyncHandler } from "../utils/AsyncHandler";
 
 // Custom interface for Auth Request

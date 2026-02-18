@@ -1,0 +1,47 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  photo     String?  
+  password  String? 
+  
+  rooms     Room[]      @relation("RoomOwner")
+  invites   RoomInvite[]
+}
+
+model Room {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique 
+  createdAt DateTime @default(now())
+  adminId   String
+  admin     User     @relation("RoomOwner", fields: [adminId], references: [id])
+  shapes    Json[]   @default([]) 
+  isPublic  Boolean  @default(false) 
+  invites   RoomInvite[]
+}
+
+model RoomInvite {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  roomId    Int
+  room      Room     @relation(fields: [roomId], references: [id]) 
+  permission PermissionType
+  @@unique([userId, roomId]) 
+}
+
+enum PermissionType {
+  EDITOR
+  VIEWER
+}

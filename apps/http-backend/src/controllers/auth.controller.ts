@@ -1,7 +1,7 @@
 // NUCLEAR FIX V3
 import { Request, Response } from "express";
 import {SignupSchema, SigninSchema} from "@repo/common";
-import { prismaClient } from "@repo/db";
+import { prismaClient } from "../db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 import { AsyncHandler } from "../utils/AsyncHandler";

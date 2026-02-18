@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { WebSocket, WebSocketServer } from 'ws';
 import { verifyUser } from './middlewares/verifyUser.middleware';
-import { prismaClient } from "@repo/db";
+import { prismaClient } from "./db";
 
 const wss = new WebSocketServer({ port: 8080 });
 
