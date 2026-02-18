@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "src/index.ts",
  "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:@prisma/client",
-    "start": "NODE_PATH=../../node_modules node dist/index.js",
-    "dev": "npm run build && npm run start"
-  },
+  "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:@prisma/client",
+  "start": "node dist/index.js", 
+  "dev": "npm run build && npm run start"
+},
   "dependencies": {
+    "@prisma/client": "^5.10.2",
     "@repo/common": "workspace:*",
     "@repo/db": "workspace:*",
     "dotenv": "^16.6.1",
