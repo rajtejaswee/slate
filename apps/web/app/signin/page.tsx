@@ -12,13 +12,16 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  
+  
+  const API_URL = process.env.NEXT_PUBLIC_HTTP_BACKEND;
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3001/api/v1/auth/signin', {
+      const response = await axios.post(`${API_URL}/api/v1/auth/signin`, {
         email,
         password,
       });
@@ -39,138 +42,62 @@ export default function SignIn() {
 
   return (
     <div className="relative min-h-screen w-full font-sans bg-white text-zinc-900 selection:bg-zinc-100 overflow-hidden flex flex-col">
-      
-      {/* --- BACKGROUND: Animated Curves + Grid --- */}
       <BackgroundPaths />
-      
-      <div
-        className="pointer-events-none absolute inset-0 opacity-20"
+      <div className="pointer-events-none absolute inset-0 opacity-20"
         style={{
-          backgroundImage:
-            'linear-gradient(to right, #e5e7eb 1px, transparent 1px), linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(to right, #e5e7eb 1px, transparent 1px), linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)',
           backgroundSize: '32px 32px',
           maskImage: 'radial-gradient(circle at center, black 60%, transparent 100%)',
         }}
       />
 
-      {/* --- Header: Branding Sync --- */}
       <header className="fixed top-0 left-0 w-full z-50 px-6 py-6 sm:px-12">
-        <Link 
-            href="/" 
-            className="text-3xl font-extrabold tracking-tighter text-zinc-900 hover:opacity-80 transition-opacity"
-            style={{ fontFamily: 'var(--font-bricolage)' }}
-        >
+        <Link href="/" className="text-3xl font-extrabold tracking-tighter text-zinc-900 hover:opacity-80 transition-opacity" style={{ fontFamily: 'var(--font-bricolage)' }}>
           Slate.
         </Link>
       </header>
 
-      {/* --- MAIN SPLIT LAYOUT --- */}
       <main className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl mx-auto px-6 lg:px-12 py-12 lg:py-0">
-        
-        {/* LEFT SIDE: Big Gradient Text */}
         <div className="w-full lg:w-1/2 flex flex-col justify-center items-start lg:pr-16 mb-12 lg:mb-0 pt-16 lg:pt-0">
             <h1 className="font-extrabold tracking-tight text-zinc-900 mb-6 flex flex-col">
-              {/* Massive Gradient Text */}
-              <span className="text-6xl sm:text-7xl lg:text-8xl leading-[0.9] text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 pb-2">
-                Welcome
-              </span> 
-              
-              {/* Smaller, tighter 'back to canvas' */}
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-zinc-800 tracking-tight mt-[-4px]">
-                back to canvas.
-              </span>
+              <span className="text-6xl sm:text-7xl lg:text-8xl leading-[0.9] text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 pb-2">Welcome</span> 
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-zinc-800 tracking-tight mt-[-4px]">back to canvas.</span>
             </h1>
-            
             <p className="text-lg sm:text-xl text-zinc-500 font-light leading-relaxed max-w-lg">
               Sign in to pick up exactly where you left off. Your boards, ideas, and diagrams are saved in place.
             </p>
         </div>
 
-        {/* RIGHT SIDE: The Card (Clean & Minimal) */}
         <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
           <div className="w-full max-w-[420px] relative overflow-hidden rounded-2xl border border-zinc-200 bg-white/80 backdrop-blur-xl shadow-[0_8px_40px_rgb(0,0,0,0.08)] p-8 sm:p-10">
-            
-            {/* Card Header */}
             <div className="mb-8">
-              <h2 className="text-xl font-semibold tracking-tight text-zinc-900 mb-2">
-                Sign in
-              </h2>
-              <p className="text-sm text-zinc-500">
-                Enter your details to access your workspace.
-              </p>
+              <h2 className="text-xl font-semibold tracking-tight text-zinc-900 mb-2">Sign in</h2>
+              <p className="text-sm text-zinc-500">Enter your details to access your workspace.</p>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleEmailSignIn} className="space-y-5" noValidate>
-              
               <div className="space-y-1.5">
-                <label
-                  htmlFor="email"
-                  className="block text-xs font-medium text-zinc-500 tracking-wide uppercase"
-                >
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="name@work-email.com"
-                  className="w-full h-11 px-3 text-[15px] text-zinc-900 placeholder-zinc-400 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-200 transition-all"
-                  disabled={isLoading}
-                />
+                <label htmlFor="email" className="block text-xs font-medium text-zinc-500 tracking-wide uppercase">Email</label>
+                <input id="email" name="email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="name@work-email.com" className="w-full h-11 px-3 text-[15px] text-zinc-900 placeholder-zinc-400 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-200 transition-all" disabled={isLoading} />
               </div>
-
               <div className="space-y-1.5">
-                <label
-                  htmlFor="password"
-                  className="block text-xs font-medium text-zinc-500 tracking-wide uppercase"
-                >
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  placeholder="••••••••"
-                  className="w-full h-11 px-3 text-[15px] text-zinc-900 placeholder-zinc-400 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-200 transition-all"
-                  disabled={isLoading}
-                />
+                <label htmlFor="password" className="block text-xs font-medium text-zinc-500 tracking-wide uppercase">Password</label>
+                <input id="password" name="password" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="••••••••" className="w-full h-11 px-3 text-[15px] text-zinc-900 placeholder-zinc-400 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-200 transition-all" disabled={isLoading} />
               </div>
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full h-11 mt-2 flex items-center justify-center rounded-lg bg-zinc-900 text-white text-[14px] font-semibold tracking-wide hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
-              >
-                {isLoading ? (
-                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-zinc-500 border-t-white" />
-                ) : (
-                    'Sign In'
-                )}
+              <button type="submit" disabled={isLoading} className="w-full h-11 mt-2 flex items-center justify-center rounded-lg bg-zinc-900 text-white text-[14px] font-semibold tracking-wide hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm">
+                {isLoading ? <div className="h-4 w-4 animate-spin rounded-full border-2 border-zinc-500 border-t-white" /> : 'Sign In'}
               </button>
             </form>
 
             <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-zinc-200"></div>
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-2 text-zinc-400">Or continue with</span>
-                </div>
+                <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-zinc-200"></div></div>
+                <div className="relative flex justify-center text-xs uppercase"><span className="bg-white px-2 text-zinc-400">Or continue with</span></div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
                 <button 
                     type="button"
-                    onClick={() => window.location.href = "http://localhost:3001/api/v1/auth/google"}
+                    onClick={() => window.location.href = `${API_URL}/api/v1/auth/google`}
                     className="flex items-center justify-center gap-2 h-10 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-700 text-sm font-medium transition-colors shadow-sm"
                 >
                     <svg className="h-4 w-4" viewBox="0 0 24 24">
@@ -183,7 +110,7 @@ export default function SignIn() {
                 </button>
                 <button 
                     type="button"
-                    onClick={() => window.location.href = "http://localhost:3001/api/v1/auth/github"}
+                    onClick={() => window.location.href = `${API_URL}/api/v1/auth/github`}
                     className="flex items-center justify-center gap-2 h-10 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-700 text-sm font-medium transition-colors shadow-sm"
                 >
                     <svg className="h-4 w-4 fill-black" viewBox="0 0 24 24">
@@ -195,14 +122,8 @@ export default function SignIn() {
 
             <p className="mt-8 text-center text-sm text-zinc-500">
               Don&apos;t have an account?{' '}
-              <Link
-                href="/signup"
-                className="font-medium text-zinc-900 hover:underline underline-offset-4"
-              >
-                Sign up
-              </Link>
+              <Link href="/signup" className="font-medium text-zinc-900 hover:underline underline-offset-4">Sign up</Link>
             </p>
-
           </div>
         </div>
       </main>
