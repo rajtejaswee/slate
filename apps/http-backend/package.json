@@ -4,11 +4,11 @@
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsup src/index.ts --format esm --clean --no-external @repo/.*",
-    "start": "node dist/index.js",
-    "lint": "tsc --noEmit"
-  },
+  "build": "tsup src/index.ts --format esm --clean --no-external --external @prisma/client",
+  "start": "node dist/index.js",
+  "dev": "tsx watch src/index.ts",
+  "lint": "tsc --noEmit"
+},
   "dependencies": {
     "@repo/common": "workspace:*",
     "@repo/db": "workspace:*",
