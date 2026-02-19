@@ -19,23 +19,45 @@ export default function CanvasPage() {
             router.push("/signin");
             return;
         }
-        
-        const ws = new WebSocket(`${WS_BACKEND}?token=${token}`);
 
-        ws.onopen = () => {
-            setSocket(ws);
-            ws.send(JSON.stringify({
-                type: "join_room",
-                roomId: roomId
-            }));
+        let ws: WebSocket;
+        let reconnectTimer: NodeJS.Timeout;
+
+        const connect = () => {
+            // Ensure WS_BACKEND strictly resolves to wss:// in production
+            ws = new WebSocket(`${WS_BACKEND}?token=${token}`);
+
+            ws.onopen = () => {
+                setSocket(ws);
+                ws.send(JSON.stringify({
+                    type: "join_room",
+                    roomId: roomId
+                }));
+            };
+
+            ws.onerror = (err) => {
+                console.error("WebSocket error:", err);
+            };
+
+            ws.onclose = () => {
+                setSocket(null);
+                // Attempt to reconnect after 3 seconds to handle Railway drops or network instability
+                reconnectTimer = setTimeout(() => {
+                    console.log("Attempting to reconnect...");
+                    connect();
+                }, 3000);
+            };
         };
 
-        ws.onerror = (err) => {
-            console.error("WebSocket failed", err);
-        };
+        connect();
 
         return () => {
-            ws.close();
+            clearTimeout(reconnectTimer);
+            if (ws) {
+                // Nullify the onclose handler to prevent infinite reconnection loops upon intentional unmount
+                ws.onclose = null; 
+                ws.close();
+            }
         };
 
     }, [roomId, router]);

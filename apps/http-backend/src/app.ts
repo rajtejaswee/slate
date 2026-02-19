@@ -16,13 +16,16 @@ app.use(cors({
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
             console.log("Blocked CORS for:", origin);
-            return callback(null, false);
+            return callback(new Error("Not allowed by CORS"));
         }
         return callback(null, true);
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"]
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], 
+    allowedHeaders: ["Content-Type", "Authorization"] 
 }));
+
+app.options("*", cors());
 
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));

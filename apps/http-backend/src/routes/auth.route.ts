@@ -3,7 +3,7 @@ import { signup, signin } from "../controllers/auth.controller";
 import { googleAuth,googleCallback } from "../controllers/google.controller";
 import { githubAuth, githubCallback } from "../controllers/github.controller";
 
-const router = Router();
+const router: Router= Router();
 
 // Standard Auth
 router.route("/signup").post(signup);

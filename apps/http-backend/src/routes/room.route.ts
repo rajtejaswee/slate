@@ -6,7 +6,7 @@ import {
     getRoomShapes 
 } from "../controllers/room.controller";
 
-const router = Router();
+const router : Router = Router();
 
 router.post("/", userMiddleware, createRoom);
 router.get("/:roomId/shapes", userMiddleware, getRoomShapes);
