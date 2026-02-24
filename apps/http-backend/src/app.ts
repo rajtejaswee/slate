@@ -5,21 +5,16 @@ import { prismaClient } from "./db";
 
 const app: Application = express();
 
-
 const allowedOrigins = [
     "http://localhost:3000",
+    "https://slate-web-murex.vercel.app", 
     process.env.FRONTEND_URL || "" 
 ];
 
+// Let the cors package handle the array matching natively. 
+// Do NOT use a custom callback that throws Errors.
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            console.log("Blocked CORS for:", origin);
-            return callback(new Error("Not allowed by CORS"));
-        }
-        return callback(null, true);
-    },
+    origin: allowedOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], 
     allowedHeaders: ["Content-Type", "Authorization"] 
