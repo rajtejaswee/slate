@@ -32,9 +32,15 @@ export const createRoom = AsyncHandler(async (req: AuthRequest, res: Response) =
 export const getRoomShapes = AsyncHandler(async (req: Request, res: Response) => {
     const roomId = req.params.roomId;
 
+    const parsedRoomId = Number(roomId);
+    if (isNaN(parsedRoomId)) {
+        res.status(400).json({ message: "Invalid room ID" });
+        return;
+    }
+
     const room = await prismaClient.room.findFirst({
         where: {
-            id: Number(roomId)
+            id: parsedRoomId
         },
         select: {
             shapes: true

@@ -26,7 +26,7 @@ export default function SignIn() {
         password,
       });
 
-      const { token } = response.data;
+      const token = response.data.data?.token || response.data.token;
       localStorage.setItem('token', token);
       toast.success('Signed in successfully');
       router.push('/canvas');
